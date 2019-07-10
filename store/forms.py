@@ -1,6 +1,7 @@
 from django import forms
-from .models import Product
+from . import models
 
-class ProductForm(forms.Form):
+class ProductRequestForm(forms.Form):
     name = forms.CharField(label='name', max_length=100)
-    category = forms.ModelChoiceField(queryset=Product.objects)
+    category = forms.ModelChoiceField(queryset=models.Category.objects)
+    description = forms.CharField(label='description', max_length=100)

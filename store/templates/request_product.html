@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Request Product</h3>
+<form action={% url 'request' %} method="post">
+    {% csrf_token %}
+    {{ product_form }}
+    <input type="submit" value="Request Product">
+</form>
+{% endblock %}

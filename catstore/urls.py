@@ -24,4 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('product/<int:id>/', views.product, name='product'),
+    path('request/', views.request_product, name='request'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
