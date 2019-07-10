@@ -16,8 +16,7 @@ def request_product(request):
     if request.method == 'POST':
         filled_form = forms.ProductRequestForm(request.POST)
         if filled_form.is_valid():
-            product_request = models.ProductRequest(**filled_form.cleaned_data)
-            product_request.save()
+            filled_form.save()
 
         return render(request, 'request_confirm.html')
 
