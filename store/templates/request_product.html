@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>Request Product</h3>
-<form action={% url 'request' %} method="post">
+<form action="{% url 'request' %}" method="post">
     {% csrf_token %}
     {{ product_form }}
     <input type="submit" value="Request Product">
 </form>
+
+<br><br>
+
+Want more than one product?
+
+<form action="{% url 'multiple_request' %}" method="get">
+    {{ multiple_form }}
+    <input type="submit" value="Submit">
+</form>
+
 {% endblock %}

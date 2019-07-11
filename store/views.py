@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.forms import formset_factory
 
 from . import models
 from . import forms
@@ -22,9 +23,30 @@ def request_product(request):
 
     elif request.method == 'GET':
 
-        form = forms.ProductRequestForm()
+        single_form = forms.ProductRequestForm()
+        multiple_form = forms.MultipleRequestForm()
 
-        return render(request, 'request_product.html', {'product_form': form})
+        return render(request, 'request_product.html', {'product_form': single_form, 'multiple_form': multiple_form})
 
 def request_confirm(request):
     return render(request, 'request_confirm.html')
+
+def multiple_request(request):
+    if request.method == 'POST':
+        RequestFormSet = formset_factory(forms.ProductRequestForm)
+        filled_formset = RequestFormSet(request.POST)
+
+        if filled_formset.is_valid():
+            for form in filled_formset:
+                print(form.cleaned_data['name'])
+            filled_formset.save()
+        return render(request, 'request_confirm.html')
+    else:
+        filled_form = forms.MultipleRequestForm(request.GET)
+
+        if filled_form.is_valid():
+            number_of_requests = filled_form.cleaned_data['number']
+
+        RequestFormSet = formset_factory(forms.ProductRequestForm, extra=number_of_requests)
+        formset = RequestFormSet()
+        return render(request, 'multiple_request.html', {'formset': formset})
