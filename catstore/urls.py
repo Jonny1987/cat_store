@@ -17,13 +17,12 @@ from django.urls import path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import include
 
 from store import views
+from store import api_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('product/<int:id>/', views.product, name='product'),
-    path('request/', views.request_product, name='request'),
-    path('multiple_request/', views.multiple_request, name='multiple_request'),
+    path('', include('store.urls')),
+    # path('', views.home, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
