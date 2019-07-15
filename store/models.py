@@ -23,6 +23,7 @@ class ProductRequest(models.Model):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(max_length=100, null=True)
+    image = models.ImageField(upload_to='images/', blank=True)
 
     def __str__(self):
         return self.name

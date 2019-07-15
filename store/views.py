@@ -25,14 +25,17 @@ def request_product(request):
         if filled_form.is_valid():
             filled_form.save()
 
-        return redirect('request_confirm')
+            return redirect('request_confirm')
+
+        single_form = filled_form
 
     elif request.method == 'GET':
 
         single_form = forms.ProductRequestForm()
-        multiple_form = forms.MultipleRequestForm()
 
-        return render(request, 'request_product.html', {'product_form': single_form, 'multiple_form': multiple_form})
+    multiple_form = forms.MultipleRequestForm()
+
+    return render(request, 'request_product.html', {'product_form': single_form, 'multiple_form': multiple_form})
 
 def request_confirm(request):
     return render(request, 'request_confirm.html')
