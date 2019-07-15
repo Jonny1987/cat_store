@@ -1,17 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import formset_factory
+from django.views import generic
 
 from . import models
 from . import forms
 
-def home(request):
-    products = models.Product.objects.all()
-    return render(request, 'home.html', {'products': products})
 
-def product(request, id):
-    product = get_object_or_404(models.Product, pk=id)
+class HomeView(generic.ListView):
+    model = models.Product
+    template_name = 'home.html'
+    context_object_name = 'products'
+    paginate_by = 10
 
-    return render(request, 'product.html', {'product': product})
+
+class ProductView(generic.DetailView):
+    model = models.Product
+    template_name = 'product.html'
+    context_object_name = 'product'
+
 
 def request_product(request):
     if request.method == 'POST':
