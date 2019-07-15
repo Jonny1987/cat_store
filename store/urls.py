@@ -17,4 +17,5 @@ urlpatterns = [
     path('product/<int:id>/', views.product, name='product'),
     path('request/', views.request_product, name='request'),
     path('multiple_request/', views.multiple_request, name='multiple_request'),
+    path('request_confirm/', views.request_confirm, name='request_confirm'),
 ]

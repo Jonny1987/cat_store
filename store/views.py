@@ -19,7 +19,7 @@ def request_product(request):
         if filled_form.is_valid():
             filled_form.save()
 
-        return render(request, 'request_confirm.html')
+        return redirect('request_confirm')
 
     elif request.method == 'GET':
 
@@ -40,7 +40,7 @@ def multiple_request(request):
             for form in filled_formset:
                 print(form.cleaned_data['name'])
             filled_formset.save()
-        return render(request, 'request_confirm.html')
+        return redirect('request_confirm')
     else:
         filled_form = forms.MultipleRequestForm(request.GET)
 

@@ -5,7 +5,7 @@ from store.models import Product
 from store.serializers import ProductSerializer
 
 
-class ProductPagination(LimitOffsetPagination):
+class DefaultPagination(LimitOffsetPagination):
     default_limit = 10
     max_lmit = 100
 
@@ -17,4 +17,4 @@ class ProductViewSet(viewsets.ModelViewSet):
     ]
     serializer_class = ProductSerializer
     filter_fields = ('id',)
-    pagination_class = ProductPagination
+    pagination_class = DefaultPagination
