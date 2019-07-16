@@ -25,7 +25,7 @@ def request_product(request):
         if filled_form.is_valid():
             filled_form.save()
 
-            return redirect('request_confirm')
+            return redirect('store:request_confirm')
 
         single_form = filled_form
 
@@ -46,11 +46,13 @@ def multiple_request(request):
         filled_formset = RequestFormSet(request.POST)
 
         if filled_formset.is_valid():
-            for form in filled_formset:
-                print(form.cleaned_data['name'])
             filled_formset.save()
-        return redirect('request_confirm')
-    else:
+
+            return redirect('store:request_confirm')
+
+        formset = filled_formset 
+
+    elif request.method == 'GET':
         filled_form = forms.MultipleRequestForm(request.GET)
 
         if filled_form.is_valid():
@@ -58,4 +60,5 @@ def multiple_request(request):
 
         RequestFormSet = formset_factory(forms.ProductRequestForm, extra=number_of_requests)
         formset = RequestFormSet()
-        return render(request, 'multiple_request.html', {'formset': formset})
+
+    return render(request, 'multiple_request.html', {'formset': formset})

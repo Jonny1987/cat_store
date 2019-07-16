@@ -1,6 +1,6 @@
 <h3>Request products</h3>
 
-<form action="{% url 'product_request' %}" method="post">
+<form action="{% url 'store:product_request' %}" method="post">
     {% csrf_token %}
     {{ formset.management_form }}
 

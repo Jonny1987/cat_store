@@ -6,6 +6,7 @@ from rest_framework import routers
 from .api_views import ProductViewSet
 from . import views
 
+app_name = 'store'
 
 router = routers.DefaultRouter()
 
