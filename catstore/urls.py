@@ -22,6 +22,8 @@ from django.urls import include
 from store import views
 from store import api_views
 
+admin.site.site_header = 'Cat Store Administration'
+
 urlpatterns = [
     path('', include('store.urls')),
     path('admin/', admin.site.urls),
