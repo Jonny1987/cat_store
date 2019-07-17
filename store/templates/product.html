@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div>
-    <h3>{{ product.name }}</h3>
-    {% if product.image %}
-        <img src="{{ product.image.url }}" height="400"/>
-    {% endif %}
-    <br><br>
-    <p>{{ product.description }}</p>
-    <p>{{ product.price }}</p>
+  <h3>{{ product.name }}</h3>
+  {% if product.image %}
+    <img src="{{ product.image.url }}" height="400"/>
+  {% endif %}
+  <br><br>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price }}</p>
 </div>
 {% endblock %}

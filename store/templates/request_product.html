@@ -5,9 +5,9 @@
 
 <h3>Request Product</h3>
 <form action="{% url 'store:request' %}" method="post">
-    {% csrf_token %}
-    {% bootstrap_form product_form %}
-    <input type="submit" value="Request Product">
+  {% csrf_token %}
+  {% bootstrap_form product_form %}
+  <input type="submit" value="Request Product">
 </form>
 
 <br><br>
@@ -15,8 +15,8 @@
 Want more than one product?
 
 <form action="{% url 'store:multiple_request' %}" method="get">
-    {% bootstrap_form multiple_form %}
-    <input type="submit" value="Submit">
+  {% bootstrap_form multiple_form %}
+  <input type="submit" value="Submit">
 </form>
 
 {% endblock %}

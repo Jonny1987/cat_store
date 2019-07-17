@@ -1,12 +1,12 @@
 <h3>Request products</h3>
 
 <form action="{% url 'store:product_request' %}" method="post">
-    {% csrf_token %}
-    {{ formset.management_form }}
+  {% csrf_token %}
+  {{ formset.management_form }}
 
-    {% for form in formset %}
-        {{ form }}
-        <br><br>
-    {% endfor %}
-    <input type="submit" value="Submit">
+  {% for form in formset %}
+    {{ form }}
+    <br><br>
+  {% endfor %}
+  <input type="submit" value="Submit">
 </form>
