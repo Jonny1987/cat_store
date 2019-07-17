@@ -8,7 +8,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'price')
+    list_display = ('id', 'name', 'price', 'category', 'displayed')
+    list_filter = ('displayed',)
 
 @admin.register(ProductRequest)
 class ProductRequestAdmin(admin.ModelAdmin):
