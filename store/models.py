@@ -25,6 +25,7 @@ class ProductRequest(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(max_length=100, null=True)
     image = models.ImageField(upload_to='images/', blank=True)
+    owner = models.ForeignKey('auth.User', related_name='product_requests', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

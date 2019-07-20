@@ -1,8 +1,11 @@
 from rest_framework import viewsets, permissions
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from store.models import Product
-from store.serializers import ProductSerializer
+from store.models import Product, ProductRequest
+from store.serializers import ProductSerializer, ProductRequestSerializer
+from store.permissions import IsOwnerOrReadOnly
 
 
 class DefaultPagination(LimitOffsetPagination):
@@ -18,3 +21,18 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     filter_fields = ('id',)
     pagination_class = DefaultPagination
+
+
+class ProductRequestList(ListCreateAPIView):
+    queryset = ProductRequest.objects.all()
+    serializer_class = ProductRequestSerializer
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
+
+    def perform_create(serializer):
+        serializer.save(owner=self.request.user)
+
+
+class ProductRequestDetail(RetrieveUpdateDestroyAPIView):
+    queryset = ProductRequest.objects.all()
+    serializer_class = ProductRequestSerializer
+    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
