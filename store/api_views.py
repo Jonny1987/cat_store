@@ -1,5 +1,4 @@
 from rest_framework import viewsets, permissions
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from store.models import Product, ProductRequest
@@ -16,16 +15,10 @@ class ProductViewSet(viewsets.ModelViewSet):
     filter_fields = ('id',)
 
 
-class ProductRequestList(ListCreateAPIView):
+class ProductRequestViewSet(viewsets.ModelViewSet):
     queryset = ProductRequest.objects.all()
     serializer_class = ProductRequestSerializer
     permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
 
-    def perform_create(serializer):
+    def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-
-class ProductRequestDetail(RetrieveUpdateDestroyAPIView):
-    queryset = ProductRequest.objects.all()
-    serializer_class = ProductRequestSerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAuthenticatedOrReadOnly]
