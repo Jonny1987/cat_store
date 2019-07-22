@@ -6,7 +6,7 @@ from store.models import Product, ProductRequest
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('name', 'category', 'description', 'price')
+        fields = ('name', 'category', 'description', 'price', 'image', 'displayed')
 
 
 class ProductRequestSerializer(serializers.ModelSerializer):
