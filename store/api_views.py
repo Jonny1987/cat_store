@@ -1,15 +1,15 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from store.models import Product, ProductRequest
 from store.serializers import ProductSerializer, ProductRequestSerializer
-from store.permissions import IsOwnerOrReadOnly
+from store.permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     permission_classes = [
-        permissions.AllowAny,
+        IsAdminOrReadOnly,
     ]
     serializer_class = ProductSerializer
     filter_fields = ('id',)
